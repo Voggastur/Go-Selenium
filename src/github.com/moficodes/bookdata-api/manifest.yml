@@ -1,0 +1,9 @@
+---
+applications:
+- name: Favourite books of the 19th century
+  random-route: true
+  memory: 256M
+  env:
+    GOVERSION: go1.12
+    GOPACKAGENAME: bookdata-api
+  buildpack: https://github.com/cloudfoundry/go-buildpack.git
