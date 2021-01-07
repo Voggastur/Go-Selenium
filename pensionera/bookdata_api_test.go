@@ -7,10 +7,10 @@ import (
 )
 
 
-func testGet() {
+func test() {
 
   url := "localhost:8080/api/v1/books/authors/iain%2520m.%2520banks"
-  method := "GET"
+  method := "curl"
 
   client := &http.Client {
   }
@@ -33,9 +33,4 @@ func testGet() {
     return
   }
   fmt.Println(string(body))
-}
-
-
-func main() {
-	testGet()
 }
