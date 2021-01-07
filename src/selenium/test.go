@@ -103,9 +103,4 @@ func Example() {
 	}
 
 	fmt.Printf("%s", strings.Replace(output, "\n\n", "\n", -1))
-
-	// Example Output:
-	// Hello WebDriver!
-	//
-	// Program exited.
 }
