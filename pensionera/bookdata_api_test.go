@@ -7,9 +7,9 @@ import (
 )
 
 
-func test() {
+func TestSearchByAuthor() {
 
-  url := "localhost:8080/api/v1/books/authors/iain%2520m.%2520banks"
+  url := "localhost:8080/api/v1/book/ISBN/3"
   method := "curl"
 
   client := &http.Client {
