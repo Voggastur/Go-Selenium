@@ -10,7 +10,7 @@ import (
 
 func TestCreateBook(t *testing.T) {
 
-  url := "localhost:8080/api/v1/book"
+  url := "http://localhost:8080/api/v1/book"
   method := "POST"
 
   payload := strings.NewReader("BookID=3&Title=Vulcan%20Philosophy&Authors=Huber%20Ugbert&ISBN=3&ISBN13=1000000000003&Ratings=25&Reviews=15&NumPages=999&LanguageCode=eng&AverageRating=2.5")
@@ -41,7 +41,7 @@ func TestCreateBook(t *testing.T) {
 }
 
 func TestSearchByISBN(t *testing.T) {
-  url := "localhost:8080/api/v1/book/isbn/3"
+  url := "http://localhost:8080/api/v1/book/isbn/3"
   method := "GET"
   client := &http.Client {
   }
