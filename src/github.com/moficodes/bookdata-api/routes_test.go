@@ -46,7 +46,7 @@ func TestGetBookByISBN(t *testing.T) {
 	}
 
 	// Check the response body is what we expect.
-	expected := `[{"book_id":"2","title":"Johans Polar Expedition","authors":"Albert Einstein","average_rating":1.6,"isbn":"2","isbn_13":"1000000000002","language_code":"eng","num_pages":999,"ratings":25,"reviews":15}]`
+	expected := `[{"book_id":"2","title":"Johans Polar Expedition","authors":"Jules Verne","average_rating":1.6,"isbn":"2","isbn_13":"1000000000002","language_code":"eng","num_pages":999,"ratings":25,"reviews":15}]`
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)
