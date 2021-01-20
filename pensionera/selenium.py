@@ -1,5 +1,5 @@
 from selenium import webdriver
-import sys,time
+import sys, time
 
 
 # Create an instance of Chrome WebDriver
@@ -69,10 +69,10 @@ nav9 = driver.find_element_by_xpath("/html/body/div[1]/div/nav/div/div[2]/div/ul
 nav1.click()
 time.sleep(2)
 if (driver.current_url=='https://pensionera.se/prisplaner'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -83,10 +83,10 @@ time.sleep(1)
 nav2.click()
 time.sleep(1)
 if (driver.current_url=='https://pensionera.se/faq'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -98,10 +98,10 @@ nav3.click()
 time.sleep(1)
 nav31.click()
 if (driver.current_url=='https://pensionera.se/om-pensionera'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -112,10 +112,10 @@ nav3.click()
 time.sleep(1)
 nav32.click()
 if (driver.current_url=='https://pensionera.se/affarsmodell'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -126,10 +126,10 @@ nav3.click()
 time.sleep(1)
 nav33.click()
 if (driver.current_url=='https://pensionera.se/avgifter-och-provision'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -140,10 +140,10 @@ nav3.click()
 time.sleep(1)
 nav34.click()
 if (driver.current_url=='https://pensionera.se/lediga-tjanster'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -154,10 +154,10 @@ nav3.click()
 time.sleep(1)
 nav35.click()
 if (driver.current_url=='https://pensionera.se/media'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -168,10 +168,10 @@ nav3.click()
 time.sleep(1)
 nav36.click()
 if (driver.current_url=='https://pensionera.se/anvandarvillkor'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -182,10 +182,10 @@ nav3.click()
 time.sleep(1)
 nav37.click()
 if (driver.current_url=='https://pensionera.se/integritetspolicy'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -196,10 +196,10 @@ nav3.click()
 time.sleep(1)
 nav38.click()
 if (driver.current_url=='https://pensionera.se/cookies'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -210,10 +210,10 @@ nav3.click()
 time.sleep(1)
 nav39.click()
 if (driver.current_url=='https://pensionera.se/kundnojdhet'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -224,10 +224,10 @@ nav3.click()
 time.sleep(1)
 nav310.click()
 if (driver.current_url=='https://pensionera.se/pensionera-score'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -240,10 +240,10 @@ time.sleep(1)
 nav4.click()
 time.sleep(1)
 if (driver.current_url=='https://pensionera.se/kontakt'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -254,10 +254,10 @@ time.sleep(1)
 nav5.click()
 time.sleep(1)
 if (driver.current_url=='https://pensionera.se/om-sparkonto-isk'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -268,10 +268,10 @@ time.sleep(1)
 nav6.click()
 time.sleep(1)
 if (driver.current_url=='https://liv.pensionera.se/'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -282,10 +282,10 @@ time.sleep(1)
 nav7.click()
 time.sleep(1)
 if (driver.current_url=='https://pensionera.se/guide'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 driver.get('https://pensionera.se/bli-medlem')
@@ -296,10 +296,10 @@ time.sleep(1)
 nav8.click()
 time.sleep(1)
 if (driver.current_url=='https://pensionera.se/bli-medlem'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 
@@ -307,10 +307,10 @@ else:
 nav9.click()
 time.sleep(1)
 if (driver.current_url=='https://pensionera.se/logga-in'):
-    print "Success"
+    print("Success")
     passed += 1
 else:
-    print "Failure"
+    print("Failure")
     total += 1
 
 # Return
@@ -334,20 +334,10 @@ inputemail.send_keys("wahekon130@cocyo.com")
 sendbutton.click()
 time.sleep(1)
 
-try:
-	driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[2]/div[1]/div/div[1]/div/div[2]/p")isDisplayed()
-except Exception,e:
-    result_flag = False
-else:
-    result_flag = True
-if result_flag is True:
-    print("Required message displayed")
-else:
-    print("Message not displayed")
 
 
 
-print("Number of passed tests:" passed, "Number of total tests:" total)
+print("Number of passed tests: " + passed + ", Number of total tests: " + total)
 time.sleep(3)
 
 driver.close() 

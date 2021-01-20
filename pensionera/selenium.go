@@ -1,4 +1,4 @@
-package selenium_test
+package main
 
 import (
 	"fmt"
@@ -9,9 +9,7 @@ import (
 	"github.com/tebeka/selenium"
 )
 
-// This example shows how to navigate to a http://play.golang.org page, input a
-// short program, run it, and inspect its output.
-//
+
 // If you want to actually run this example:
 //
 //   1. Ensure the file paths at the top of the function are correct.
@@ -19,7 +17,7 @@ import (
 //      function.
 //   3. Run:
 //      go test -test.run=Example$ github.com/tebeka/selenium
-func Example() {
+func main() {
 	// Start a Selenium WebDriver server instance (if one is not already
 	// running).
 	const (
@@ -43,64 +41,20 @@ func Example() {
 	// Connect to the WebDriver instance running locally.
 	caps := selenium.Capabilities{"browserName": "firefox"}
 	wd, err := selenium.NewRemote(caps, fmt.Sprintf("http://localhost:%d/wd/hub", port))
+
+	// Start of Edit
 	if err != nil {
 		panic(err)
 	}
-	defer wd.Quit()
+	wd.maximize_window()
+	wd.get("https://pensionera.se/bli-medlem")
+	title, err := wd.title()
 
-	// Navigate to the simple playground interface.
-	if err := wd.Get("http://play.golang.org/?simple=1"); err != nil {
-		panic(err)
-	}
-
-	// Get a reference to the text box containing code.
-	elem, err := wd.FindElement(selenium.ByCSSSelector, "#code")
-	if err != nil {
-		panic(err)
-	}
-	// Remove the boilerplate code already in the text box.
-	if err := elem.Clear(); err != nil {
-		panic(err)
+	if string(title) != "Bli medlem | Pensionera" {
+		fmt.Println("Fail: Unexpected title found, got this: ", title)
+	} else {
+		fmt.Println("Success: Title matches expected value, got this: ", title)
 	}
 
-	// Enter some new code in text box.
-	err = elem.SendKeys(`
-		package main
-		import "fmt"
-		func main() {
-			fmt.Println("Hello WebDriver!\n")
-		}
-	`)
-	if err != nil {
-		panic(err)
-	}
-
-	// Click the run button.
-	btn, err := wd.FindElement(selenium.ByCSSSelector, "#run")
-	if err != nil {
-		panic(err)
-	}
-	if err := btn.Click(); err != nil {
-		panic(err)
-	}
-
-	// Wait for the program to finish running and get the output.
-	outputDiv, err := wd.FindElement(selenium.ByCSSSelector, "#output")
-	if err != nil {
-		panic(err)
-	}
-
-	var output string
-	for {
-		output, err = outputDiv.Text()
-		if err != nil {
-			panic(err)
-		}
-		if output != "Waiting for remote server..." {
-			break
-		}
-		time.Sleep(time.Millisecond * 100)
-	}
-
-	fmt.Printf("%s", strings.Replace(output, "\n\n", "\n", -1))
+	wd.Quit()
 }

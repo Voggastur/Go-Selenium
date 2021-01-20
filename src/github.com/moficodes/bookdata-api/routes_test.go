@@ -10,7 +10,7 @@ import (
 
 func TestCreateBook(t *testing.T) {
 
-	var jsonStr = []byte(`{"book_id":2,"title":"Johans Polar Expedition","authors":"Jules Verne","isbn":2,"isbn_13":1000000000002,"language_code":"eng","num_pages":999,"ratings":25,"reviews":15}`)
+	var jsonStr = []byte(`BookID=2&Title=Johans%20Marmelade%20Tips&Authors=Jules%20Verne&ISBN=2&ISBN13=1000000000002&Ratings=25&Reviews=15&NumPages=999&LanguageCode=eng&AverageRating=1.6}`)
 
 	req, err := http.NewRequest("POST", "http://localhost:8080/api/v1/book", bytes.NewBuffer(jsonStr))
 	if err != nil {
