@@ -210,10 +210,9 @@ func TestCreateBookWithInvalidParameters(t *testing.T) {
   if err != nil {
 	  t.Fatalf(err.Error())
   }
-  if string(body) != `{"success": "created"}` {
-	  return
-  } else {
-          // Request a delete of the irregular book in the else block
+  if string(body) == `{"success": "created"}` {
+	  
+	  // Request a delete of the irregular book
 	  url := "http://localhost:8080/api/v1/book/isbn/"
 	  isbn := "1"
 	  method := "DELETE"
@@ -227,7 +226,7 @@ func TestCreateBookWithInvalidParameters(t *testing.T) {
 		  t.Fatalf(err.Error())
 	  }
 	  res.Body.Close()
-	  t.Errorf("Book was created regardless of string in integer field, the book has been automatically deleted by its ISBN")
+	  t.Errorf("Book was created regardless of invalid parameter input, the book has been automatically deleted by its ISBN")
   }
 }
 
