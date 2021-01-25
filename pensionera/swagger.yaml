@@ -1,0 +1,122 @@
+openapi: 3.0.1
+info:
+  title: bookdata API
+  description: A database of books, searchable by isbn or authors
+  version: 1.0.0
+  contact:
+    name: Bookdata API Support
+    email: v3x0r_x014@hotmail.com
+
+servers:
+  - url: 'http://localhost:8080'
+paths:
+  /api/v1/book/isbn/{ISBN}:
+    get:
+      summary: Get Book by ISBN, max 10 numbers
+      parameters:
+        - in: path
+          name: ISBN
+          schema:
+            type: integer
+          required: true
+          description: ISBN number to search books with
+      description: get book by entering its ISBN
+      responses:
+        default:
+          description: success message retrieved when books are found
+      servers:
+        - url: 'http://localhost:8080'
+    servers:
+      - url: 'http://localhost:8080'
+  /api/v1/book:
+    post:
+      description: Post a new book to the bookdata API
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                LanguageCode:
+                  type: string
+                Reviews:
+                  type: integer
+                BookID:
+                  type: integer
+                ISBN:
+                  type: integer
+                AverageRating:
+                  type: number
+                Authors:
+                  type: string
+                NumPages:
+                  type: integer
+                Title:
+                  type: string
+                ISBN13:
+                  type: number
+                Ratings:
+                  type: integer
+            examples:
+              '1':
+                value: |-
+                  {
+                      "BookID": 2,
+                      "Title": "My Marmelade Tips",
+                      "Authors": "Jules Verne",
+                      "AverageRating": 1.6,
+                      "ISBN": 2,
+                      "ISBN13": 1000000000002,
+                      "LanguageCode": "eng",
+                      "NumPages": 8,
+                      "Ratings": 25,
+                      "Reviews": 15
+                  }
+      responses:
+        '201':
+          description: Book has been added to database
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
+              examples:
+                '0':
+                  value: '{"success": "created"}'
+      servers:
+        - url: 'http://localhost:8080'
+    servers:
+      - url: 'http://localhost:8080'
+  /api/v1/books/authors/{AUTHORS}:
+    get:
+      summary: Get books by searching for authors
+      parameters:
+        - in: path
+          name: AUTHORS
+          schema:
+            type: string
+          required: true
+          description: Author variable to search books with
+      description: Get a book by name of authors
+      responses:
+        '200':
+          description: success message retrieved when books are found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                '0':
+                  value: >-
+                    [{"book_id":"32610","title":"On the Shoulders of Giants: The
+                    Great Works of Physics and Astronomy","authors":"Stephen
+                    Hawking-Isaac Newton-Nicolaus Copernicus-Albert
+                    Einstein-Johannes Kepler-Galileo
+                    Galilei","average_rating":4.2,"isbn":"0762427329","isbn_13":"9780762427321","language_code":"eng","num_pages":256,"ratings":4014,"reviews":34}]
+      servers:
+        - url: 'http://localhost:8080'
+    servers:
+      - url: 'http://localhost:8080'
