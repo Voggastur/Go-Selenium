@@ -47,12 +47,10 @@ func main() {
 	if err != nil {
 		log.Fatalf(err)
 	}
-	expected, err := string("Bli medlem | Pensionera")
-	if err != nil {
-		log.Fatalf(err)
-	}
+	expected := string("Bli medlem | Pensionera")
+
 	if string(title) != expected {
-		log.Errorf("Fail: Unexpected title found, got: %v, expected: %v", title, expected)
+		log.Println("Fail: Unexpected title found, got: %v, expected: %v", title, expected)
 	}
 
 	wd.Quit()
