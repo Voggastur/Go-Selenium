@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 	"time"
-
+	"log"
 	"github.com/tebeka/selenium"
 )
 
@@ -34,26 +34,25 @@ func main() {
 	selenium.SetDebug(true)
 	service, err := selenium.NewSeleniumService(seleniumPath, port, opts...)
 	if err != nil {
-		panic(err) // panic is used only as an example and is not otherwise recommended.
-	}
-	defer service.Stop()
-
-	// Connect to the WebDriver instance running locally.
-	caps := selenium.Capabilities{"browserName": "firefox"}
-	wd, err := selenium.NewRemote(caps, fmt.Sprintf("http://localhost:%d/wd/hub", port))
-
-	// Start of Edit
-	if err != nil {
 		panic(err)
 	}
-	wd.maximize_window()
+	defer service.Stop()
+	caps := selenium.Capabilities{"browserName": "firefox"}
+	wd, err := selenium.NewRemote(caps, fmt.Sprintf("http://localhost:%d/wd/hub", port))
+	if err != nil {
+		log.Fatalf(err)
+	}
 	wd.get("https://pensionera.se/bli-medlem")
-	title, err := wd.title()
-
-	if string(title) != "Bli medlem | Pensionera" {
-		fmt.Println("Fail: Unexpected title found, got this: ", title)
-	} else {
-		fmt.Println("Success: Title matches expected value, got this: ", title)
+	title, err := wd.getTitle()
+	if err != nil {
+		log.Fatalf(err)
+	}
+	expected, err := string("Bli medlem | Pensionera")
+	if err != nil {
+		log.Fatalf(err)
+	}
+	if string(title) != expected {
+		log.Errorf("Fail: Unexpected title found, got: %v, expected: %v", title, expected)
 	}
 
 	wd.Quit()
