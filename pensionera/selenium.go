@@ -34,7 +34,7 @@ func main() {
 	selenium.SetDebug(true)
 	service, err := selenium.NewSeleniumService(seleniumPath, port, opts...)
 	if err != nil {
-		panic(err)
+		log.Fatalf(err)
 	}
 	defer service.Stop()
 	caps := selenium.Capabilities{"browserName": "firefox"}
