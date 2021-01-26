@@ -25,7 +25,7 @@ func main() {
 	selenium.SetDebug(true)
 	service, err := selenium.NewSeleniumService(seleniumPath, port, opts...)
 	if err != nil {
-		log.Fatalf(err)
+		log.Fatalf(err.Error())
 	}
 
 	defer service.Stop()
@@ -34,13 +34,13 @@ func main() {
 	wd, err := selenium.NewRemote(caps, fmt.Sprintf("http://localhost:%d/wd/hub", port))
 
 	if err != nil {
-		log.Fatalf(err)
+		log.Fatalf(err.Error())
 	}
 
-	wd.get("https://pensionera.se/bli-medlem")
+	wd.Get("https://pensionera.se/bli-medlem")
 	title, err := wd.getTitle()
 	if err != nil {
-		log.Fatalf(err)
+		log.Fatalf(err.Error())
 	}
 	expected := string("Bli medlem | Pensionera")
 
