@@ -3,21 +3,18 @@ info:
   description: "This is a sample Bookdata API. You can find out more about     Swagger at swagger.io"
   version: "1.0.0"
   title: "Bookdata API"
-  termsOfService: "http://swagger.io/terms/"
   contact:
     email: "apiteam@swagger.io"
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+
 host: "localhost:8080"
 basePath: "/api/v1"
 
 tags:
-- name: "Get Books"
+- name: "Get books"
   description: "Everything about books"
-  externalDocs:
-    description: "Find out more"
-    url: "http://swagger.io"
 schemes:
 - "https"
 - "http"
@@ -26,7 +23,7 @@ paths:
   /book/{ISBN}:
     get:
       tags:
-      - "Get Books"
+      - "Get books"
       summary: Find book by ISBN
       description: Returns a single book
       operationId: "searchByISBN"
@@ -53,7 +50,7 @@ paths:
   /books/authors/{AUTHORS}:
     get:
       tags: 
-      - Get Books
+      - Get books
       summary: Get books by searching for authors, could be several matches
       description: Get a book by name of authors
       parameters:
