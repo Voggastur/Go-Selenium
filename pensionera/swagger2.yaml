@@ -1,95 +1,54 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "This is a sample Bookdata API. You can find out more about     Swagger at swagger.io"
-  version: "1.0.0"
-  title: "Bookdata API"
+  version: '1.0'
+  title: BookdataAPI
+  description: Search books by either ISBN number or authors
   contact:
-    email: "apiteam@swagger.io"
-  license:
-    name: "Apache 2.0"
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+    name: Johan Kjellin
+    email: v3x0r_x014@hotmail.com
 
-host: "localhost:8080"
-basePath: "/api/v1"
+host: 'localhost:8080'
+basePath: '/api/v1'
+schemes:
+  - http
 
 tags:
-- name: "Get books"
-  description: "Everything about books"
-schemes:
-- "https"
-- "http"
+  - name: "Get books"
+    description: "Search the library for books"
 
 paths:
-  /book/{ISBN}:
+  /book/isbn/{ISBN}:
     get:
       tags:
       - "Get books"
-      summary: Find book by ISBN
-      description: Returns a single book
-      operationId: "searchByISBN"
       produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - name: "ISBN"
-        in: "path"
-        description: "ISBN of book to return"
-        required: true
-        type: "integer"
-        format: "int64"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/Book"
-        "400":
-          description: "Invalid ID supplied"
-        "404":
-          description: "Book not found"
-
-  /books/authors/{AUTHORS}:
-    get:
-      tags: 
-      - Get books
-      summary: Get books by searching for authors, could be several matches
-      description: Get a book by name of authors
+        - application/json
       parameters:
         - in: path
-          name: AUTHORS
-          description: Author variable to search books with
+          name: ISBN
+          description: 'ISBN is an ID for the book, examples are 1597800449 and 0762427329'
           required: true
           type: string
       responses:
         '200':
-          description: success message when books are found
-        '400':
-          description: Bad Request
-        '403':
-          description: Forbidden message recieved
+          description: Success, found book
         '404':
-          description: Missing record means no books found with searched author
+          description: Book not found
 
-definitions:
-  Book:
-    type: "object"
-    properties:
-      LanguageCode:
-        type: string
-      Reviews:
-        type: integer
-      BookID:
-        type: integer
-      ISBN:
-        type: integer
-      AverageRating:
-        type: number
-      Authors:
-        type: string
-      NumPages:
-        type: integer
-      Title:
-        type: string
-      ISBN13:
-        type: number
-      Ratings:
-        type: integer
+  /books/authors/{AUTHORS}:
+    get:
+      tags:
+      - "Get books"
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: AUTHORS
+          description: 'Seachs by authors to find all books by the authors, could be several books'
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success, found book
+        '404':
+          description: Book not found
