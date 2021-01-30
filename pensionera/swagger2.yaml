@@ -6,21 +6,18 @@ info:
   contact:
     name: Johan Kjellin
     email: v3x0r_x014@hotmail.com
-
 host: 'localhost:8080'
-basePath: '/api/v1'
+basePath: /api/v1
 schemes:
   - http
-
 tags:
-  - name: "Get books"
-    description: "Search the library for books"
-
+  - name: Get books
+    description: Search the library for books
 paths:
-  /book/isbn/{ISBN}:
+  '/book/isbn/{ISBN}':
     get:
       tags:
-      - "Get books"
+        - Get books
       produces:
         - application/json
       parameters:
@@ -31,24 +28,25 @@ paths:
           type: string
       responses:
         '200':
-          description: Success, found book
+          description: 'Success, found book'
         '404':
           description: Book not found
-
-  /books/authors/{AUTHORS}:
+  '/books/authors/{AUTHORS}':
     get:
       tags:
-      - "Get books"
+        - Get books
       produces:
         - application/json
       parameters:
         - in: path
           name: AUTHORS
-          description: 'Seachs by authors to find all books by the authors, could be several books'
+          description: >-
+            Seachs by authors to find all books by the authors, could be several
+            books
           required: true
           type: string
       responses:
         '200':
-          description: Success, found book
+          description: 'Success, found book'
         '404':
           description: Book not found
