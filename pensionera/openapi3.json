@@ -1,0 +1,135 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "BookdataAPI",
+    "description": "Search books by either ISBN number or authors",
+    "contact": {
+      "name": "Johan Kjellin",
+      "email": "v3x0r_x014@hotmail.com"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Get books",
+      "description": "Search the library for books"
+    }
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/book/isbn/{ISBN}": {
+      "get": {
+        "tags": [
+          "Get books"
+        ],
+        "parameters": [
+          {
+            "name": "ISBN",
+            "in": "path",
+            "description": "ISBN is an ID for the book, examples are 1597800449 and 0762427329",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, found book",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/book"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Book not found",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/books/authors/{AUTHORS}": {
+      "get": {
+        "tags": [
+          "Get books"
+        ],
+        "parameters": [
+          {
+            "name": "AUTHORS",
+            "in": "path",
+            "description": "Seachs by authors to find all books by the authors, could be several books",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, found book",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/book"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Book not found",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "book": {
+        "type": "object",
+        "properties": {
+          "LanguageCode": {
+            "type": "string"
+          },
+          "Reviews": {
+            "type": "integer"
+          },
+          "BookID": {
+            "type": "integer"
+          },
+          "ISBN": {
+            "type": "integer"
+          },
+          "AverageRating": {
+            "type": "number"
+          },
+          "Authors": {
+            "type": "string"
+          },
+          "NumPages": {
+            "type": "integer"
+          },
+          "Title": {
+            "type": "string"
+          },
+          "ISBN13": {
+            "type": "number"
+          },
+          "Ratings": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}
