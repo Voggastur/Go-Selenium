@@ -17,7 +17,7 @@ func main() {
         )
 
         opts := []selenium.ServiceOption{
-                selenium.StartFrameBuffer(),           // Start an X frame buffer for the browser to run in.
+                // selenium.StartFrameBuffer(),           // Start an X frame buffer for the browser to run in.
                 selenium.ChromeDriver(chromeDriverPath), // Specify the path to ChromeDriver in order to use Chrome.
                 selenium.Output(os.Stderr),            // Output debug information to STDERR.
         }
@@ -30,7 +30,7 @@ func main() {
 
         defer service.Stop()
 
-        caps := selenium.Capabilities{"browserName": "Chrome"}
+        caps := selenium.Capabilities{"browserName": "chrome"}
         wd, err := selenium.NewRemote(caps, fmt.Sprintf("http://localhost:%d/wd/hub", port))
 
         if err != nil {
