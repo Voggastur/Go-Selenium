@@ -23,7 +23,11 @@ func init() {
 	books = &datastore.Books{}
 	books.Initialize()
 }
-
+// @title BookAPI Application
+// @description This is a Bookdata API application
+// @version 1.0
+// @host localhost:8080
+// @BasePath /api/v1
 func main() {
 	r := mux.NewRouter()
 	log.Println("bookdata api")

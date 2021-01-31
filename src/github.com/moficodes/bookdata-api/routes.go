@@ -134,6 +134,16 @@ func getSkipParam(r *http.Request) (int, error) {
 	return skip, nil
 }
 
+// CreateBook godoc
+// @Summary Create a book
+// @Description Create a new book item
+// @Tags Get book
+// @Accept json
+// @Produce json
+// @Param book body &loader.BookData true "New Book"
+// @Success 201 {object} &loader.Bookdata
+// @Failure 400 {object} HTTPError
+// @Router /book [post]
 func createBook(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	err := r.ParseForm()
