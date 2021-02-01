@@ -1,52 +1,142 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
-  version: '1.0'
-  title: BookdataAPI
-  description: Search books by either ISBN number or authors
+  description: "Presenting our amazing Bookdata API"
+  version: "1.0.0"
+  title: "Book API"
   contact:
-    name: Johan Kjellin
-    email: v3x0r_x014@hotmail.com
-host: 'localhost:8080'
-basePath: /api/v1
-schemes:
-  - http
+    email: "v3x0r_x014@hotmail.com"
+host: "localhost:8080"
+basePath: "/api/v1"
 tags:
-  - name: Get books
-    description: Search the library for books
+- name: "Books"
+  description: "Get, Delete or Post books"
+schemes:
+- "http"
 paths:
-  '/book/isbn/{ISBN}':
+  /books/authors/{AUTHORS}:
     get:
       tags:
-        - Get books
+      - "Get books"
+      summary: "Search books by authors"
+      description: "Multiple books can be found"
+      operationId: "searchByAuthor"
       produces:
-        - application/json
+      - "application/json"
       parameters:
-        - in: path
-          name: ISBN
-          description: 'ISBN is an ID for the book, examples are 1597800449 and 0762427329'
-          required: true
-          type: string
+      - name: "AUTHORS"
+        in: "path"
+        description: "Name of an author to search books with"
+        required: true
+        type: "string"
+        collectionFormat: "csv"
       responses:
-        '200':
-          description: 'Success, found book'
-        '404':
-          description: Book not found
-  '/books/authors/{AUTHORS}':
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/book"
+        "201":
+          description: "Success created"
+        "400":
+          description: "Invalid status value"
+        "403":
+          description: "Forbidden error"
+        "404":
+          description: "Books not found"
+  /book/isbn/{ISBN}:
     get:
       tags:
-        - Get books
+      - "Get books"
+      summary: "Search books by ISBN"
+      description: "Returns a single book"
+      operationId: "searchByISBN"
       produces:
-        - application/json
+      - "application/json"
       parameters:
-        - in: path
-          name: AUTHORS
-          description: >-
-            Seachs by authors to find all books by the authors, could be several
-            books
-          required: true
-          type: string
+      - name: "ISBN"
+        in: "path"
+        description: "ISBN of book to return"
+        required: true
+        type: "integer"
+        format: "int64"
       responses:
-        '200':
-          description: 'Success, found book'
-        '404':
-          description: Book not found
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/book"
+        "400":
+          description: "Invalid ISBN supplied"
+        "404":
+          description: "Book not found"
+    delete:
+      tags:
+      - "Get books"
+      summary: "Deletes a book"
+      description: "Delete a book from the library by entering it's ISBN"
+      operationId: "deleteByISBN"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "ISBN"
+        in: "path"
+        description: "Book ISBN to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "400":
+          description: "Invalid ISBN supplied"
+        "404":
+          description: "Book not found"
+definitions:
+  book:
+    type: object
+    properties:
+      LanguageCode:
+        type: string
+        maximum: 9
+        example: "eng"
+      Reviews:
+        type: integer
+        minimum: 0
+        maximum: 99999
+        example: 535
+      BookID:
+        type: integer
+        minimum: 1
+        maximum: 99999
+        example: 12009
+      ISBN:
+        type: integer
+        minimum: 1
+        maximum: 9999999999
+        example: 1597800449
+      AverageRating:
+        type: number
+        minimum: 1
+        maximum: 5
+        example: 4.01
+      Authors:
+        type: string
+        minimum: 3
+        maximum: 100
+        example: "Iain M. Banks"
+      NumPages:
+        type: integer
+        minimum: 1
+        maximum: 99999
+        example: 434
+      Title:
+        type: string
+        minimum: 1
+        maximum: 100
+        example: "The Algebraist"
+      ISBN13:
+        type: number
+        minimum: 1
+        maximum: 9999999999999
+        example: 9781597800440
+      Ratings:
+        type: integer
+        minimum: 1
+        maximum: 99999
+        example: 14737
