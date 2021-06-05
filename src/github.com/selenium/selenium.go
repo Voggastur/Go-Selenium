@@ -10,13 +10,13 @@ import (
 )
 
 const (
-	seleniumPath     = "../selenium-server-standalone-3.141.59.jar"
-	chromeDriverPath = "../chromedriver"
-	port             = 4444
-	protocol         = "http://localhost:8080"
+	seleniumPath     = "deps/selenium-server-standalone-3.141.59.jar"
+	chromeDriverPath = "deps/chromedriver"
+	serverPort       = 4444
+	webSite          = "https://www.google.com"
 	// Input Parameters for Signup Page
-	seed            = "199106197435" // "Arthur" + "Dent" Testperson
-	email           = "rataveh652@lidte.com"
+	seed            = "200002022382"         // Skatteverket Test SSN
+	email           = "rataveh652@lidte.com" // temp-mail.org
 	phone           = "080101010"
 	salary          = "123123"
 	waitMillisecond = 150
@@ -40,7 +40,7 @@ func main() {
 	}
 
 	selenium.SetDebug(true)
-	service, err := selenium.NewSeleniumService(seleniumPath, port, opts...)
+	service, err := selenium.NewSeleniumService(seleniumPath, serverPort, opts...)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -48,12 +48,12 @@ func main() {
 	defer service.Stop()
 
 	caps := selenium.Capabilities{"browserName": "chrome"}
-	wd, err := selenium.NewRemote(caps, fmt.Sprintf("http://localhost:%d/wd/hub", port))
+	wd, err := selenium.NewRemote(caps, fmt.Sprintf("http://localhost:%d/wd/hub", serverPort))
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if err := wd.Get(protocol); err != nil {
+	if err := wd.Get(webSite); err != nil {
 		log.Fatal(err)
 	}
 
@@ -62,8 +62,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if title != "Pensionspara | Få full kontroll över din pension med Pensionera.se" {
-		log.Fatalf("FAIL: Unexpected Title, Got: %v, Expected: Pensionspara | Få full kontroll över din pension med Pensionera.se", title)
+	if title != "Google" {
+		log.Fatalf("FAIL: Unexpected Title, Got: %v, Expected: Google", title)
 	}
 
 	windowID, err := wd.CurrentWindowHandle()
@@ -76,12 +76,12 @@ func main() {
 		log.Fatal(err)
 	}
 
-	blimedlem, err := wd.FindElement(selenium.ByCSSSelector, "#start-layout > div.xbox > nav > div > div.background-overlay > div > ul > li:nth-child(8) > a")
+	searchbar, err := wd.FindElement(selenium.ByXPATH, "/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if err := blimedlem.Click(); err != nil {
+	if err := searchbar.Click(); err != nil {
 		log.Fatal(err)
 	}
 
@@ -101,8 +101,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if currentURL != protocol+"/bli-medlem" {
-		log.Fatalf("FAIL: Not the expected URL, got: %v wanted: %v/bli-medlem", currentURL, protocol)
+	if currentURL != webSite+"/bli-medlem" {
+		log.Fatalf("FAIL: Not the expected URL, got: %v wanted: %v/bli-medlem", currentURL, webSite)
 	}
 
 	//Personnummer input
@@ -177,7 +177,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if currentURL != protocol+"/account/onboarding" {
+	if currentURL != webSite+"/account/onboarding" {
 		log.Fatal("FAIL: Not the expected URL")
 	}
 
@@ -330,7 +330,7 @@ func main() {
 
 	fmt.Print(currentURL)
 
-	if currentURL != protocol+"/account/historik" {
+	if currentURL != webSite+"/account/historik" {
 		log.Fatalf("FAIL: Not the expected URL, got: %s", currentURL)
 	}
 
@@ -363,7 +363,7 @@ func main() {
 
 	fmt.Print(currentURL)
 
-	if currentURL != protocol+"/account/pensionsprognos" {
+	if currentURL != webSite+"/account/pensionsprognos" {
 		log.Fatalf("FAIL: Not the expected URL, got: %v", currentURL)
 	}
 
@@ -396,8 +396,8 @@ func main() {
 
 	fmt.Print(currentURL)
 
-	if currentURL != protocol+"/account/onboarding" {
-		fmt.Printf("FAIL: Not the expected URL, got: %v, wanted: %v/account/onboarding", currentURL, protocol)
+	if currentURL != webSite+"/account/onboarding" {
+		fmt.Printf("FAIL: Not the expected URL, got: %v, wanted: %v/account/onboarding", currentURL, webSite)
 	}
 
 	time.Sleep(time.Millisecond * waitMillisecond)
@@ -429,7 +429,7 @@ func main() {
 
 	fmt.Print(currentURL)
 
-	if currentURL != protocol+"/account/mina-tillgangar" {
+	if currentURL != webSite+"/account/mina-tillgangar" {
 		log.Fatal("FAIL: Not the expected URL")
 	}
 
@@ -462,7 +462,7 @@ func main() {
 
 	fmt.Print(currentURL)
 
-	if currentURL != protocol+"/account/min-pension" {
+	if currentURL != webSite+"/account/min-pension" {
 		log.Fatal("FAIL: Not the expected URL")
 	}
 
@@ -493,7 +493,7 @@ func main() {
 
 	fmt.Print(currentURL)
 
-	if currentURL != protocol+"/account/attgora" {
+	if currentURL != webSite+"/account/attgora" {
 		log.Fatal("FAIL: Not the expected URL")
 	}
 
